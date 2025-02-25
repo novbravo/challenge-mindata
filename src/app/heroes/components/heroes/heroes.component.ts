@@ -16,11 +16,13 @@ import { HeroesService } from '../../services/heroes.service';
 
 import { Heroe } from '../../intefaces/heroe.inteface';
 import { ModalDialogComponent } from '../../../shared/components/modal-dialog/modal-dialog.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-heroes',
   imports: [MatChipsModule, CommonModule, MatTableModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule,
-    MatDialogModule, MatProgressSpinnerModule, RouterLink, MatPaginatorModule
+    MatDialogModule, MatProgressSpinnerModule, RouterLink, MatPaginatorModule, MatCardModule, MatDividerModule
   ],
   templateUrl: './heroes.component.html',
   styleUrl: './heroes.component.css'
@@ -30,7 +32,8 @@ export class HeroesComponent implements AfterViewInit {
   heroeSelected?: Heroe;
   dialog = inject(MatDialog);
 
-  displayedColumns = ['id', 'name', 'fullName', 'age', 'power', 'actions'];
+  readonly displayedColumns: string[] = ['id', 'name', 'fullName', 'age', 'power', 'actions'];
+
   dataSource = new MatTableDataSource<Heroe>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -47,15 +50,15 @@ export class HeroesComponent implements AfterViewInit {
 
   filterName = signal<string>('');
 
+  filterBy(query: Event) {
+    this.filterName.set((query.target as HTMLInputElement).value);
+  }
+
   heroes = computed(() =>
     this.heroesService.heroes().filter(h =>
       h.name.toLowerCase().includes(this.filterName().toLowerCase())
     )
   );
-
-  filterBy(query: Event) {
-    this.filterName.set((query.target as HTMLInputElement).value);
-  }
 
   onDelete(heroe: Heroe) {
     const dialogRef = this.dialog.open(ModalDialogComponent, {

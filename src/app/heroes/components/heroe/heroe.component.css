@@ -1,0 +1,142 @@
+/* heroe.component.css */
+.container {
+  padding: 1rem;
+  min-height: calc(100vh - 64px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  max-width: 500px;
+  width: 100%;
+  margin: 2rem auto;
+  padding: 2rem;
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+              0px 6px 10px 0px rgba(0, 0, 0, 0.14),
+              0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+}
+
+mat-card-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #303f9f;
+  margin-bottom: 2rem !important;
+  display: block;
+  text-align: center !important;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+mat-form-field {
+  margin-bottom: 1.5rem;
+}
+
+mat-form-field.appearance-outline .mat-form-field-outline {
+  color: rgba(0, 0, 0, 0.12);
+}
+
+mat-form-field.mat-form-field-invalid .mat-form-field-outline {
+  color: #d32f2f !important;
+}
+
+mat-error {
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+  color: #d32f2f;
+}
+
+mat-selection-list {
+  margin: 1rem 0 2rem;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+  padding: 8px !important;
+}
+
+mat-list-option {
+  padding: 12px 16px !important;
+  margin: 4px 0 !important;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+mat-list-option:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.alinear-fila {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 2rem;
+}
+
+button[mat-stroked-button] {
+  padding: 0 1.5rem;
+  border-width: 2px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+button[mat-stroked-button][color='primary'] {
+  color: #303f9f;
+  border-color: #303f9f;
+}
+
+button[mat-stroked-button][color='primary']:hover {
+  background-color: #303f9f;
+  color: white;
+}
+
+button[mat-stroked-button][color='secondary'] {
+  color: #757575;
+  border-color: #bdbdbd;
+}
+
+button[mat-stroked-button][color='secondary']:hover {
+  background-color: #f5f5f5;
+}
+
+mat-label {
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+mat-error {
+  font-weight: 500;
+  padding: 4px 8px;
+  background-color: #ffebee;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .card {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  mat-card-title {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .alinear-fila {
+    flex-direction: column-reverse;
+    gap: 0.5rem;
+  }
+
+  button[mat-stroked-button] {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Estado de solo lectura */
+:host-context([data-mode='read']) mat-form-field .mat-form-field-flex,
+:host-context([data-mode='read']) mat-selection-list {
+  background-color: #f5f5f5;
+  pointer-events: none;
+}

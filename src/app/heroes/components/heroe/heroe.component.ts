@@ -20,10 +20,11 @@ import { UppercaseTextDirective } from '../../../shared/directives/uppercase-tex
   selector: 'app-heroe',
   imports: [RouterLink, MatButtonModule, MatIconModule, MatInputModule, MatGridListModule, ReactiveFormsModule, MatExpansionModule,
     MatFormFieldModule, MatListModule, MatCardModule, UppercaseTextDirective],
-  templateUrl: './heroe.component.html'
+  templateUrl: './heroe.component.html',
+  styleUrl: './heroe.component.css'
 })
 export class HeroeComponent {
-  typeOfPowers: string[] = ['Intelligence', 'Speed', 'Power'];
+  typeOfPowers: string[] = ['Inteligencia', 'Velocidad', 'Fuerza', 'Volar'];
 
   private router = inject(Router)
   private fb = inject(FormBuilder);

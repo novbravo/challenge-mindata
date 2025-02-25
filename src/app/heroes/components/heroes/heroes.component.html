@@ -1,82 +1,84 @@
-<h1>Listado de Héroes</h1>
-<hr>
+<mat-card class="heroes-card">
+  <h1 class="mat-headline-4">Listado de Héroes</h1>
+  <mat-divider class="divider-margin"></mat-divider>
 
-<section class="alinear-fila">
-  <mat-form-field>
-    <mat-label>Buscar por nombre</mat-label>
-    <input matInput (keyup)="filterBy($event)" placeholder="Ingrese el nombre" #input>
-  </mat-form-field>
-  <div class="example-button-row">
-    <button mat-stroked-button
-            routerLink="/heroe/0/new"
-            >Nuevo héroe
-    </button>
-  </div>
-</section>
+  <section class="filter-section">
+    <mat-form-field>
+      <mat-label>Buscar por nombre</mat-label>
+      <input matInput (keyup)="filterBy($event)" placeholder="Ingrese el nombre" #input>
+    </mat-form-field>
+    <div class="example-button-row">
+      <button mat-raised-button color="primary"
+              routerLink="/heroe/0/new"
+              ><mat-icon>add</mat-icon>Nuevo héroe
+      </button>
+    </div>
+  </section>
 
-@if (heroes()) {
-  <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="heroes()" >
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef>ID</th>
-        <td mat-cell *matCellDef="let hero">{{ hero.id }}</td>
-      </ng-container>
+  @if (heroes()) {
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="heroes()" >
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>ID</th>
+          <td mat-cell *matCellDef="let hero">{{ hero.id }}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Nombre</th>
-        <td mat-cell *matCellDef="let hero">{{ hero.name }}</td>
-      </ng-container>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Nombre</th>
+          <td mat-cell *matCellDef="let hero">{{ hero.name }}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="fullName">
-        <th mat-header-cell *matHeaderCellDef>Nombre completo</th>
-        <td mat-cell *matCellDef="let hero">{{ hero.fullName }}</td>
-      </ng-container>
+        <ng-container matColumnDef="fullName">
+          <th mat-header-cell *matHeaderCellDef>Nombre completo</th>
+          <td mat-cell *matCellDef="let hero">{{ hero.fullName }}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="age">
-        <th mat-header-cell *matHeaderCellDef>Edad</th>
-        <td mat-cell *matCellDef="let hero">{{ hero.age }}</td>
-      </ng-container>
+        <ng-container matColumnDef="age">
+          <th mat-header-cell *matHeaderCellDef>Edad</th>
+          <td mat-cell *matCellDef="let hero">{{ hero.age }}</td>
+        </ng-container>
 
-      <ng-container matColumnDef="power">
-        <th mat-header-cell *matHeaderCellDef>Poderes</th>
-        <td mat-cell *matCellDef="let hero">
-          @if (hero.power) {
-            <mat-chip-set aria-label="power">
-              <mat-chip>
-                {{ hero.power }}
-              </mat-chip>
-            </mat-chip-set>
-          }
-        </td>
-      </ng-container>
+        <ng-container matColumnDef="power">
+          <th mat-header-cell *matHeaderCellDef>Poderes</th>
+          <td mat-cell *matCellDef="let hero">
+            @if (hero.power) {
+              <mat-chip-set aria-label="power">
+                <mat-chip>
+                  {{ hero.power }}
+                </mat-chip>
+              </mat-chip-set>
+            }
+          </td>
+        </ng-container>
 
-      <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef>Acciones</th>
-        <td mat-cell *matCellDef="let hero">
-          <button [routerLink]="['/heroe', hero.id, 'read']" mat-mini-fab class="button-actions-padding">
-            <mat-icon fontIcon="visibility"></mat-icon>
-          </button>
-          <button [routerLink]="['/heroe/', hero.id, 'edit']" mat-mini-fab class="button-actions-padding">
-            <mat-icon fontIcon="edit_note"></mat-icon>
-          </button>
-          <button (click)="onDelete(hero)" mat-mini-fab>
-            <mat-icon fontIcon="delete"></mat-icon>
-          </button>
-        </td>
-      </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let hero">
+            <button [routerLink]="['/heroe', hero.id, 'read']" mat-mini-fab class="button-actions-padding">
+              <mat-icon fontIcon="visibility"></mat-icon>
+            </button>
+            <button [routerLink]="['/heroe/', hero.id, 'edit']" mat-mini-fab class="button-actions-padding">
+              <mat-icon fontIcon="edit_note"></mat-icon>
+            </button>
+            <button (click)="onDelete(hero)" mat-mini-fab class="button-actions-padding">
+              <mat-icon fontIcon="delete"></mat-icon>
+            </button>
+          </td>
+        </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-    <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"
-      showFirstLastButtons >
-    </mat-paginator>
-  </div>
-}
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+      <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"
+        showFirstLastButtons >
+      </mat-paginator>
+    </div>
+  }
 
-@if (heroes().length === 0) {
-  <div class="center">
-    No hay registros para mostrar
-  </div>
-}
+  @if (heroes().length === 0) {
+    <div class="center">
+      No hay registros para mostrar
+    </div>
+  }
+</mat-card>
 

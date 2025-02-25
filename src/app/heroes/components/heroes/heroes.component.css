@@ -1,20 +1,129 @@
-.button-actions-padding {
-  margin-right: 10px;
+.heroes-card {
+  margin: 2rem;
+  padding: 2rem;
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+              0px 4px 5px 0px rgba(0, 0, 0, 0.14),
+              0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 }
 
-.alinear-fila {
+.heroes-card h1 {
+  color: #303f9f;
+  margin-bottom: 1.5rem;
+  font-size: 2.125rem;
+  font-weight: 400;
+  line-height: 1.235;
+}
+
+.divider-margin {
+  margin: 1.5rem 0;
+}
+
+.filter-section {
   display: flex;
+  gap: 1rem;
   align-items: center;
-  justify-content: space-between;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.filter-section mat-form-field {
+  flex: 1 1 300px;
+}
+
+.filter-section button {
+  flex-shrink: 0;
+}
+
+.mat-elevation-z8 {
+  overflow-x: auto;
+  border-radius: 4px;
+  box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2),
+              0px 3px 4px 0px rgba(0, 0, 0, 0.14),
+              0px 1px 8px 0px rgba(0, 0, 0, 0.12);
+}
+
+.mat-elevation-z8 table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.mat-elevation-z8 th {
+  background-color: #e8eaf6;
+  font-weight: 500;
+  color: #303f9f;
+  font-size: 0.875rem;
+}
+
+.mat-elevation-z8 td,
+.mat-elevation-z8 th {
+  padding: 1rem;
+  white-space: nowrap;
+  text-align: left;
+  font-size: 0.875rem;
+}
+
+.mat-elevation-z8 tr:not(:last-child) td {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.mat-elevation-z8 tr:hover td {
+  background-color: rgba(0, 0, 0, 0.04);
+  transition: background-color 0.2s;
+}
+
+.mat-paginator {
+  background-color: transparent;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.button-actions-padding {
+  margin-right: 0.5rem;
+  transform: scale(0.8);
+}
+
+.button-actions-padding mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
 }
 
 .center {
-  margin-top: 30px;
-  display: grid;
-  place-items: center;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #757575;
+  font-style: italic;
 }
 
-.spinner {
-  width: 50px !important;
-  height: 50px !important;
+@media (max-width: 600px) {
+  .heroes-card {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  .filter-section {
+    flex-direction: column;
+  }
+
+  .filter-section mat-form-field {
+    width: 100%;
+    flex: 1 1 auto;
+  }
+
+  .mat-elevation-z8 td,
+  .mat-elevation-z8 th {
+    padding: 0.5rem;
+  }
+}
+
+/* Estilos para los chips de poderes */
+mat-chip {
+  max-width: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+              0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+              0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
