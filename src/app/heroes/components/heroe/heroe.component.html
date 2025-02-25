@@ -1,0 +1,62 @@
+
+<section>
+  <div class="container">
+    <mat-card class="card">
+      <mat-card-content>
+        <mat-card-title>
+          {{ actionText() }} superhéroe
+        </mat-card-title>
+        <form autocomplete="off" [formGroup]="heroeForm" (ngSubmit)="saveHeroe()">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Nombre</mat-label>
+            <input matInput
+                  formControlName="name" appUppercaseText/>
+
+            @if (formUtils.isValidField(heroeForm, 'name')) {
+              <mat-error>
+                {{ formUtils.getFieldError(heroeForm, 'name') }}
+              </mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Nombre Completo</mat-label>
+            <input matInput
+                  formControlName="fullName" />
+
+            @if (formUtils.isValidField(heroeForm, 'fullName')) {
+              <mat-error>
+                {{ formUtils.getFieldError(heroeForm, 'fullName') }}
+              </mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Edad</mat-label>
+            <input matInput
+                  type="number"
+                  formControlName="age" />
+
+            @if (formUtils.isValidField(heroeForm, 'age')) {
+              <mat-error>
+                {{ formUtils.getFieldError(heroeForm, 'age') }}
+              </mat-error>
+            }
+          </mat-form-field>
+
+          <mat-selection-list formControlName="power" #powersList>
+            <mat-label>Poderes</mat-label>
+            @for (power of typeOfPowers; track power) {
+              <mat-list-option [value]="power">{{ power }}</mat-list-option>
+            }
+          </mat-selection-list>
+
+          <div class="alinear-fila button-actions-padding">
+            <button mat-stroked-button color="secondary" routerLink="/heroes">Volver</button>
+            <button mat-stroked-button color="primary" type="submit" [disabled]="heroeForm.invalid || action === 'read'" >Guardar</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</section>

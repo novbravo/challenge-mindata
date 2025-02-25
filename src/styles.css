@@ -1,1 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.card {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
+.button-actions-padding {
+  margin-right: 10px;
+}
+
+.alinear-fila {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+mat-card-title {
+  margin-bottom: 20px !important;
+  text-align: right;
+}
