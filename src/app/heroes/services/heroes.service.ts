@@ -1,15 +1,16 @@
 import { effect, Injectable, signal } from '@angular/core';
 import { Heroe } from '../intefaces/heroe.inteface';
 
-const loadFromLocalStorage = (): Heroe[] => {
-  const heroes = localStorage.getItem('heroes');
-  return heroes ? JSON.parse(heroes) : [];
-}
+
 
 @Injectable({providedIn: 'root'})
 export class HeroesService {
+  loadFromLocalStorage = (): Heroe[] => {
+    const heroes = localStorage.getItem('heroes');
+    return heroes ? JSON.parse(heroes) : [];
+  }
 
-  heroes = signal<Heroe[]>(loadFromLocalStorage());
+  heroes = signal<Heroe[]>(this.loadFromLocalStorage());
 
   saveToLocalStorage = effect(() => {
     localStorage.setItem('heroes', JSON.stringify(this.heroes()));
