@@ -23,7 +23,7 @@ import { UppercaseTextDirective } from '../../../shared/directives/uppercase-tex
   templateUrl: './heroe.component.html',
   styleUrl: './heroe.component.css'
 })
-export class HeroeComponent {
+export default class HeroeComponent {
   typeOfPowers: string[] = ['Inteligencia', 'Velocidad', 'Fuerza', 'Volar'];
 
   private router = inject(Router)

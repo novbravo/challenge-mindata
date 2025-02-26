@@ -1,6 +1,4 @@
 import { Routes } from '@angular/router';
-import { HeroesComponent } from './heroes/components/heroes/heroes.component';
-import { HeroeComponent } from './heroes/components/heroe/heroe.component';
 import { HomeComponent } from './shared/pages/home/home.component';
 
 export const routes: Routes = [
@@ -10,11 +8,11 @@ export const routes: Routes = [
   },
   {
     path: 'heroes',
-    component: HeroesComponent
+    loadComponent: () => import('./heroes/components/heroes/heroes.component')
   },
   {
     path: 'heroe/:id/:action',
-    component: HeroeComponent
+    loadComponent: () => import('./heroes/components/heroe/heroe.component')
   },
   {
     path: '**',

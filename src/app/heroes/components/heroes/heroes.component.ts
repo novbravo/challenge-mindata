@@ -27,7 +27,7 @@ import { MatDividerModule } from '@angular/material/divider';
   templateUrl: './heroes.component.html',
   styleUrl: './heroes.component.css'
 })
-export class HeroesComponent implements AfterViewInit {
+export default class HeroesComponent implements AfterViewInit {
   heroesService = inject(HeroesService);
   heroeSelected?: Heroe;
   dialog = inject(MatDialog);

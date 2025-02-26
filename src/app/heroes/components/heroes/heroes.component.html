@@ -57,7 +57,7 @@
             <button [routerLink]="['/heroe', hero.id, 'read']" mat-mini-fab class="button-actions-padding">
               <mat-icon fontIcon="visibility"></mat-icon>
             </button>
-            <button [routerLink]="['/heroe/', hero.id, 'edit']" mat-mini-fab class="button-actions-padding">
+            <button [routerLink]="['/heroe', hero.id, 'edit']" mat-mini-fab class="button-actions-padding">
               <mat-icon fontIcon="edit_note"></mat-icon>
             </button>
             <button (click)="onDelete(hero)" mat-mini-fab class="button-actions-padding">
