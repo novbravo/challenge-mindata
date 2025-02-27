@@ -3,5 +3,5 @@ export interface Heroe {
   age: number;
   fullName: string;
   name: string;
-  power: string;
+  power: string[];
 }

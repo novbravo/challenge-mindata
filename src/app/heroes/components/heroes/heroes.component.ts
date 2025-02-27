@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, computed, inject, input, signal, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, computed, DestroyRef, effect, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -22,43 +22,54 @@ import { MatDividerModule } from '@angular/material/divider';
 @Component({
   selector: 'app-heroes',
   imports: [MatChipsModule, CommonModule, MatTableModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule,
-    MatDialogModule, MatProgressSpinnerModule, RouterLink, MatPaginatorModule, MatCardModule, MatDividerModule
+    MatPaginatorModule, MatDialogModule, MatProgressSpinnerModule, RouterLink, MatCardModule, MatDividerModule
   ],
   templateUrl: './heroes.component.html',
   styleUrl: './heroes.component.css'
 })
-export default class HeroesComponent implements AfterViewInit {
+export default class HeroesComponent implements AfterViewInit, OnInit {
   heroesService = inject(HeroesService);
-  heroeSelected?: Heroe;
   dialog = inject(MatDialog);
+  private destroyRef = inject(DestroyRef);
 
   readonly displayedColumns: string[] = ['id', 'name', 'fullName', 'age', 'power', 'actions'];
 
-  dataSource = new MatTableDataSource<Heroe>();
+  dataSource = new MatTableDataSource<Heroe>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor() {
-    this.dataSource.data = this.heroesService.heroes();
-  }
-
-  ngAfterViewInit() {
-    setTimeout(() => {
-      this.dataSource.paginator = this.paginator;
-    });
-  }
-
   filterName = signal<string>('');
-
-  filterBy(query: Event) {
-    this.filterName.set((query.target as HTMLInputElement).value);
-  }
 
   heroes = computed(() =>
     this.heroesService.heroes().filter(h =>
       h.name.toLowerCase().includes(this.filterName().toLowerCase())
     )
   );
+
+  constructor() {
+    const dataEffect = effect(() => {
+      this.dataSource.data = this.heroes();
+
+      if (this.dataSource.paginator) {
+        this.dataSource.paginator.firstPage();
+      }
+    });
+    this.destroyRef.onDestroy(() => dataEffect.destroy());
+  }
+
+  ngOnInit() {
+    this.dataSource.data = this.heroesService.heroes();
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.paginator._intl.itemsPerPageLabel = 'Items por página'
+  }
+
+  filterBy(query: Event) {
+    const filterValue = (query.target as HTMLInputElement).value;
+    this.filterName.set(filterValue.trim().toLowerCase());
+  }
 
   onDelete(heroe: Heroe) {
     const dialogRef = this.dialog.open(ModalDialogComponent, {
@@ -72,5 +83,4 @@ export default class HeroesComponent implements AfterViewInit {
       }
     });
   }
-
 }

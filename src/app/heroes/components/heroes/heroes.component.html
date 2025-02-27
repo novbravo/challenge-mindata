@@ -17,7 +17,7 @@
 
   @if (heroes()) {
     <div class="mat-elevation-z8">
-      <table mat-table [dataSource]="heroes()" >
+      <table mat-table [dataSource]="dataSource" >
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef>ID</th>
           <td mat-cell *matCellDef="let hero">{{ hero.id }}</td>
@@ -43,9 +43,11 @@
           <td mat-cell *matCellDef="let hero">
             @if (hero.power) {
               <mat-chip-set aria-label="power">
-                <mat-chip>
-                  {{ hero.power }}
-                </mat-chip>
+                @for (power of hero.power; track $index) {
+                  <mat-chip>
+                    {{ power }}
+                  </mat-chip>
+                }
               </mat-chip-set>
             }
           </td>
@@ -69,8 +71,10 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
-      <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"
-        showFirstLastButtons >
+      <mat-paginator
+        showFirstLastButtons
+        [pageSizeOptions]="[5, 10, 20]"
+        [pageSize]="5" >
       </mat-paginator>
     </div>
   }
